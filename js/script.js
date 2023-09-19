@@ -1,7 +1,11 @@
 // ELEMENTS
-const container   = document.querySelector('.container');
-const topBar      = document.querySelector('.top-bar');
-const diffSelector = document.getElementById('difficulty-selector');
+const container     = document.querySelector('.container');
+const topBar        = document.querySelector('.top-bar');
+const diffSelector  = document.getElementById('difficulty-selector');
+
+const message       = document.querySelector('h1');
+
+const messageEnd    = 'Hai perso. Hai cliccato su una bomba!'
 
 let started = false;
 
@@ -21,12 +25,11 @@ let counter = 0;
 const bombs = [];
 
 
-
-
-
 reset();
 
+
 getStarted();
+
 
 
 function init(num){
@@ -39,8 +42,6 @@ function init(num){
 
 };
 
-
-console.log('INIZIO---', counter);
 
 function squareGeneration(index){
 
@@ -91,6 +92,12 @@ function squareGeneration(index){
     counter++;
 
     console.log('PUNTEGGIO---', counter, this._squareID);
+  
+    if (isFind == true) {
+      const endOutput = document.createElement('p')
+      endOutput.innerHTML = messageEnd;
+      container.append(endOutput);
+    }
 
   };
   
@@ -106,20 +113,20 @@ function reset(){
   bombs.splice(0, bombs.length);
 };
 
-let htmlBomb;
 
 function getStarted(){
 
   buttonStart.addEventListener('click', function(){
+
     squaresNumber = choiceDifficulty(diffSelector.value);
+
+    message.innerHTML = '';
 
     reset();
     
     generateBombs(squaresNumber);
+
     init(squaresNumber);
-    
-    console.log('primi tre elementi della lista bombe -----', bombs[0], bombs[1], bombs[2]);
-    
 
   });
   
