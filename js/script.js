@@ -6,6 +6,7 @@ const diffSelector  = document.getElementById('difficulty-selector');
 const message       = document.querySelector('h1');
 
 const messageEnd    = 'Hai perso. Hai cliccato su una bomba!'
+const messageWin    = 'Hai vinto. Hai cliccato su tutte le celle!'
 
 let started = false;
 
@@ -60,7 +61,7 @@ function squareGeneration(index){
 
   // 7. Assegno la classe bomba agli elementi della lista bombe
   if (bombs.includes(newSquare._squareID)) {
-    newSquare.classList.add('bomb');
+    newSquare.classList.add('bomb', 'clicked');
   }
 
  let isFind = false;
@@ -99,21 +100,27 @@ function squareGeneration(index){
     counterPoints++;
 
     let pointsOutput = document.getElementById('points');
+
     pointsOutput.innerHTML = "Punteggio: " + counterPoints;
 
     console.log('PUNTEGGIO---', counterPoints, this._squareID);
     
     // 10.
+    const endOutput = document.createElement('p')
+
     if (isFind == true) {
 
-      const endOutput = document.createElement('p')
 
-      endOutput.innerHTML = messageEnd;
+      endOutput.innerHTML = messageEnd + ` Il tuo punteggio è di ${counterPoints}`;
 
-      container.append(endOutput);
+      
+    } else if (counterPoints == squaresNumber - 16) {
+
+      endOutput.innerHTML = messageWin + ` Il tuo punteggio è di ${counterPoints}`;
 
     }
-
+    
+    container.append(endOutput);
   };
   
   container.append(newSquare);
@@ -144,8 +151,6 @@ function reset(){
   counterPoints = 0;
 
 };
-
-
 
 
 
