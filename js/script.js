@@ -93,11 +93,10 @@ function getStarted(){
 
 function choiceDifficulty(value) {
 
+  if (value == 0) return false;
   if (value == 1) return 100;
   if (value == 2) return 81;
   if (value == 3) return 49;
-
-  return false
   
 };
 
@@ -106,27 +105,41 @@ function choiceDifficulty(value) {
 function generateBombs(maxSquares){
   
   let targetBomb = 16
-
-  for (let c = 0; c < targetBomb ; c++){
   
-    
+  let isPick = false;
 
-    let bomb = Math.ceil(Math.random() * maxSquares);
-    
-    console.log('numero estratto--', bomb);
+  if (!maxSquares) {
+    console.log('mi sono fermato');
+    isPick = true;
+  } else {
 
-    if (bombs.includes(bomb)) {
-      console.log('E\' STATO GIA\' ESTRATTO');
-      c--
-      bomb = Math.ceil(Math.random() * maxSquares);
+    for (let counterBomb = 0; counterBomb < targetBomb ; counterBomb++){
   
-    } else {
-      bombs.push(bomb);
+      let bomb = Math.ceil(Math.random() * maxSquares);
+      
+      console.log('numero estratto--', bomb);
+  
+   
+  
+      if (bombs.includes(bomb)) {
+        console.log('E\' STATO GIA\' ESTRATTO');
+        counterBomb--
+        bomb = Math.ceil(Math.random() * maxSquares);
+    
+      } else {
+        bombs.push(bomb);
+      }
+  
     }
 
-  }
+    isPick = true;
+  }  
+
+
 
   console.log(bombs);
+
+
 };
 
 function randomizer(max){
