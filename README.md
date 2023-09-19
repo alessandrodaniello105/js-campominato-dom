@@ -9,4 +9,5 @@ Campo Minato
 1. Verifico che la selezione del livello sia valida
 1. Assegno la classe bomba agli elementi della lista bombe
 1. Creo la condizione di fine gioco: mostro le bombe e congelo il gioco
+1. Creo messaggio che invita a startare il gioco
 1. Se il giocatore ha cliccato su una bomba perde e stampo il messaggio di sconfitta con punteggio, se invece ha cliccato sull'ultimo quadrato vuoto (numero quadrati - numero bombe) vince e stampo il messaggio di vittoria con punteggio.
