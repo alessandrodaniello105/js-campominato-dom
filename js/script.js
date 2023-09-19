@@ -52,22 +52,29 @@ function squareGeneration(index){
 
   newSquare._squareID = index;
 
+  if (bombs.includes(newSquare._squareID)) {
+    newSquare.classList.add('bomb');
+  }
 
   // 2. Al click del quadrato rimuovo la funzione click dal quadrato cliccato. Poi '++' counter.
   newSquare.addEventListener('click', handleSquareClick);
   
   function handleSquareClick(){
+
     newSquare.classList.add('clicked');
+
     newSquare.removeEventListener('click', handleSquareClick);
+
     counter++;
+
     console.log('PUNTEGGIO---', counter, this._squareID);
+
   };
   
-  
-  
-  
   container.append(newSquare);
+
   return newSquare;
+
 };
 
 
@@ -76,6 +83,7 @@ function reset(){
   bombs.splice(0, bombs.length);
 };
 
+let htmlBomb;
 
 function getStarted(){
 
@@ -84,9 +92,12 @@ function getStarted(){
 
     reset();
     
-    init(squaresNumber);
     generateBombs(squaresNumber);
-  
+    init(squaresNumber);
+    
+    console.log('primi tre elementi della lista bombe -----', bombs[0], bombs[1], bombs[2]);
+    
+
   });
   
 };
@@ -106,11 +117,13 @@ function generateBombs(maxSquares){
   
   let targetBomb = 16
   
-  let isPick = false;
 
+  // 6. Verifico che la selezione del livello sia valida
   if (!maxSquares) {
+
     console.log('mi sono fermato');
-    isPick = true;
+
+
   } else {
 
     for (let counterBomb = 0; counterBomb < targetBomb ; counterBomb++){
@@ -118,8 +131,6 @@ function generateBombs(maxSquares){
       let bomb = Math.ceil(Math.random() * maxSquares);
       
       console.log('numero estratto--', bomb);
-  
-   
   
       if (bombs.includes(bomb)) {
         console.log('E\' STATO GIA\' ESTRATTO');
@@ -132,15 +143,12 @@ function generateBombs(maxSquares){
   
     }
 
-    isPick = true;
   }  
-
-
 
   console.log(bombs);
 
-
 };
+
 
 function randomizer(max){
   return Math.ceil(Math.random() * max);
