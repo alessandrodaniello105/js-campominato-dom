@@ -57,16 +57,16 @@ function squareGeneration(index){
     newSquare.classList.add('bomb');
   }
 
- 
+ let isFind = false;
 
   // 2. Al click del quadrato rimuovo la funzione click dal quadrato cliccato. Poi '++' counter.
   newSquare.addEventListener('click', handleSquareClick);
   
   function handleSquareClick(){
 
+    // 8. Creo la condizione di fine gioco: mostro le bombe e congelo il gioco
     if (!this.classList.contains('bomb')) {
 
-      
       this.classList.add('clicked')
     
     } else {
@@ -74,9 +74,16 @@ function squareGeneration(index){
       allBombs = document.querySelectorAll('.bomb');
       
       for(let bombEl = 0; bombEl < bombs.length; bombEl++ ) {
+
         allBombs[bombEl].classList.add('clicked');
+
       };
 
+      const stopLevel = document.createElement('div');
+      stopLevel.className = 'stop-level';
+      container.append(stopLevel);
+
+      isFind = true;
     }
 
     newSquare.removeEventListener('click', handleSquareClick);
