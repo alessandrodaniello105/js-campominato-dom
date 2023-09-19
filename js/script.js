@@ -52,16 +52,32 @@ function squareGeneration(index){
 
   newSquare._squareID = index;
 
+  // 7. Assegno la classe bomba agli elementi della lista bombe
   if (bombs.includes(newSquare._squareID)) {
     newSquare.classList.add('bomb');
   }
+
+ 
 
   // 2. Al click del quadrato rimuovo la funzione click dal quadrato cliccato. Poi '++' counter.
   newSquare.addEventListener('click', handleSquareClick);
   
   function handleSquareClick(){
 
-    newSquare.classList.add('clicked');
+    if (!this.classList.contains('bomb')) {
+
+      
+      this.classList.add('clicked')
+    
+    } else {
+      
+      allBombs = document.querySelectorAll('.bomb');
+      
+      for(let bombEl = 0; bombEl < bombs.length; bombEl++ ) {
+        allBombs[bombEl].classList.add('clicked');
+      };
+
+    }
 
     newSquare.removeEventListener('click', handleSquareClick);
 
