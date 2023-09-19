@@ -19,7 +19,7 @@ let squaresNumber;
 
 
 // 1. Creo un counter per il punteggio
-let counter = 0;
+let counterPoints = 0;
 
 // 3. Creo una lista globale vuota che conterrà le mie bombe
 const bombs = [];
@@ -30,6 +30,9 @@ reset();
 
 getStarted();
 
+
+
+// FUNCTIONS
 
 
 function init(num){
@@ -43,15 +46,17 @@ function init(num){
 };
 
 
+
+
+
+/*****  SQUARE GENERATION / BUTTON START *****/
+/*****  SQUARE GENERATION / BUTTON START *****/
+
 function squareGeneration(index){
 
   let newSquare = document.createElement('div');
 
-  newSquare.className = 'square';
-
-  newSquare.classList.add('square' + '-' + squaresNumber);
-
-  newSquare._squareID = index;
+  newSquareEl(newSquare, index);
 
   // 7. Assegno la classe bomba agli elementi della lista bombe
   if (bombs.includes(newSquare._squareID)) {
@@ -59,6 +64,7 @@ function squareGeneration(index){
   }
 
  let isFind = false;
+
 
   // 2. Al click del quadrato rimuovo la funzione click dal quadrato cliccato. Poi '++' counter.
   newSquare.addEventListener('click', handleSquareClick);
@@ -69,6 +75,7 @@ function squareGeneration(index){
     if (!this.classList.contains('bomb')) {
 
       this.classList.add('clicked')
+
     
     } else {
       
@@ -89,14 +96,22 @@ function squareGeneration(index){
 
     newSquare.removeEventListener('click', handleSquareClick);
 
-    counter++;
+    counterPoints++;
 
-    console.log('PUNTEGGIO---', counter, this._squareID);
-  
+    let pointsOutput = document.getElementById('points');
+    pointsOutput.innerHTML = "Punteggio: " + counterPoints;
+
+    console.log('PUNTEGGIO---', counterPoints, this._squareID);
+    
+    // 10.
     if (isFind == true) {
+
       const endOutput = document.createElement('p')
+
       endOutput.innerHTML = messageEnd;
+
       container.append(endOutput);
+
     }
 
   };
@@ -108,10 +123,31 @@ function squareGeneration(index){
 };
 
 
-function reset(){
-  container.innerHTML = '';
-  bombs.splice(0, bombs.length);
+function newSquareEl(element, index) {
+  element.className = 'square';
+
+  element.classList.add('square' + '-' + squaresNumber);
+
+  element._squareID = index;
 };
+
+
+
+/***** RESET FUNCTION ******/
+
+function reset(){
+  
+  container.innerHTML = '';
+  
+  bombs.splice(0, bombs.length);
+  
+  counterPoints = 0;
+
+};
+
+
+
+
 
 
 function getStarted(){
