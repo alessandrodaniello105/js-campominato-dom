@@ -2,6 +2,10 @@
 const container     = document.querySelector('.container');
 const topBar        = document.querySelector('.top-bar');
 const diffSelector  = document.getElementById('difficulty-selector');
+const pointsOutput = document.getElementById('points');
+let counterPoints = '0';
+
+
 
 const message       = document.querySelector('h1');
 
@@ -22,7 +26,7 @@ let squaresNumber;
 
 
 // 1. Creo un counter per il punteggio
-let counterPoints = 0;
+
 
 // 3. Creo una lista globale vuota che conterrà le mie bombe
 const bombs = [];
@@ -73,24 +77,26 @@ function squareGeneration(index){
   newSquare.addEventListener('click', handleSquareClick);
   
   function handleSquareClick(){
+    
 
     // 8. Creo la condizione di fine gioco: mostro le bombe e congelo il gioco
     if (!bombs.includes(this._squareID)) {
-
+      
       this.classList.add('clicked')
-
-    
+      
+      counterPoints++;
+      
+      
     } else {
       
       allBombs = document.querySelectorAll('.bomb');
       
       for(let bombEl = 0; bombEl < bombs.length; bombEl++ ) {
-
+        
         allBombs[bombEl].classList.add('clicked');
-
+        
       };
-
-      counterPoints--;
+      
 
       const stopLevel = document.createElement('div');
       stopLevel.className = 'stop-level';
@@ -101,9 +107,7 @@ function squareGeneration(index){
 
     newSquare.removeEventListener('click', handleSquareClick);
 
-    counterPoints++;
 
-    let pointsOutput = document.getElementById('points');
 
     pointsOutput.innerHTML = "Punteggio: " + counterPoints;
 
@@ -115,12 +119,12 @@ function squareGeneration(index){
     if (isFind == true) {
 
 
-      endOutput.innerHTML = messageEnd + ` Il tuo punteggio è di ${counterPoints}`;
+      endOutput.innerHTML = messageEnd + ` Il tuo punteggio è di ${counterPoints} su ${squaresNumber - targetBomb}`;
 
       
     } else if (counterPoints == squaresNumber - targetBomb) {
 
-      endOutput.innerHTML = messageWin + ` Il tuo punteggio è di ${counterPoints}`;
+      endOutput.innerHTML = messageWin + ` Il tuo punteggio è di ${counterPoints} su ${squaresNumber - targetBomb}`;
 
     }
     
@@ -152,6 +156,9 @@ function reset(){
   
   bombs.splice(0, bombs.length);
   
+  counterPoints = '0';
+
+  pointsOutput.innerHTML = "Punteggio: 0";
 
 };
 
