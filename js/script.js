@@ -10,6 +10,8 @@ const messageWin    = 'Hai vinto. Hai cliccato su tutte le celle!'
 
 let started = false;
 
+const targetBomb = 16
+
 // START BUTTON
 const buttonStart = document.createElement('button');
 buttonStart.innerHTML = 'START';
@@ -116,7 +118,7 @@ function squareGeneration(index){
       endOutput.innerHTML = messageEnd + ` Il tuo punteggio è di ${counterPoints}`;
 
       
-    } else if (counterPoints == squaresNumber - 16) {
+    } else if (counterPoints == squaresNumber - targetBomb) {
 
       endOutput.innerHTML = messageWin + ` Il tuo punteggio è di ${counterPoints}`;
 
@@ -150,7 +152,6 @@ function reset(){
   
   bombs.splice(0, bombs.length);
   
-  counterPoints = 0;
 
 };
 
@@ -186,10 +187,7 @@ function choiceDifficulty(value) {
 
 
 // 4. Creo una funzione di generazione random di 16 numeri con range min(1)-max(numero quadrati) e con verifica di univocità
-function generateBombs(maxSquares){
-  
-  let targetBomb = 16
-  
+function generateBombs(maxSquares){ 
 
   // 6. Verifico che la selezione del livello sia valida
   if (!maxSquares) {
