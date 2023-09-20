@@ -61,7 +61,7 @@ function squareGeneration(index){
 
   // 7. Assegno la classe bomba agli elementi della lista bombe
   if (bombs.includes(newSquare._squareID)) {
-    newSquare.classList.add('bomb', 'clicked');
+    newSquare.classList.add('bomb');
   }
 
  let isFind = false;
@@ -73,7 +73,7 @@ function squareGeneration(index){
   function handleSquareClick(){
 
     // 8. Creo la condizione di fine gioco: mostro le bombe e congelo il gioco
-    if (!this.classList.contains('bomb')) {
+    if (!bombs.includes(this._squareID)) {
 
       this.classList.add('clicked')
 
@@ -87,6 +87,8 @@ function squareGeneration(index){
         allBombs[bombEl].classList.add('clicked');
 
       };
+
+      counterPoints--;
 
       const stopLevel = document.createElement('div');
       stopLevel.className = 'stop-level';
